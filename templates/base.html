@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>{% block title %}سهالات{% endblock %}</title>
+	    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+<header style="background-color: rgb(255, 255, 255); opacity:1;">
+<div class="navbar">
+	<img src="{% static 'images/logo.png' %}" alt="سهالات">
+  <a class="nav_item active" href="{% url 'home' %}">الرئيسية</a>
+  <a class="nav_item" href="#">تواصل معنا</a>
+  <a class="nav_item" href="#">عن سهالات</a>
+  {% if user.is_authenticated %}
+  {% if user.profile.ac_type == 0 %}
+  <a href="{% url 'trips' %}" class="nav_item">قائمة الرحلات</a>
+  {% else %}
+  <a href="{% url 'trips' %}" class="nav_item">رحلاتي</a>
+
+  {% endif %}
+  <p style="margin-bottom: 10px;">مرحبًا بك يا {{ user.first_name }}</p>
+  <a href="{% url 'logout' %}"><br>تسجيل الخروج</a>
+  {% else %}
+  <a class="nav_item" href="{% url 'login' %}">تسجيل الدخول</a>
+  <details class="nav_item">
+  <summary>انضم معنا</summary>
+  <ul>
+  <li><a href="{% url 'new_customer' %}" style="color:white;">إنشاء حساب مستفيد</a></li>
+  <li><a href="{% url 'new_driver' %}" style="color:white;">انضم إلى كباتن سهالات</a></li>
+  </ul>
+  </details>
+  {% endif %}
+  
+</div>
+</header>
+{% block content %}
+<div style="background-color: #D69A41;">
+<center>
+<br /><br />
+<br />
+<img src="{% static 'images/logo.png' %}" alt="سهالات">
+</div>
+</center>
+{% endblock %}
+<footer>
+<div class="footer">
+  <p>Copyright © 2023 سهالات</p>
+
+</div>
+
+
+</footer>
+</body>
+</html>

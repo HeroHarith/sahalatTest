@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}مشوار جديد - سهالات{% endblock %}
+
+{% block content %}
+<center>
+<form method="post">
+<{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">إنشاء</button>
+</form>
+</center>
+{% endblock %}

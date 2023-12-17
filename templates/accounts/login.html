@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br /><br /><br /><br /><br /><br /><br /><br />
+<center>
+<h3>تسجيل الدخول</h3>
+<form method="post" class="form">
+{% csrf_token %}
+{{ form }}
+<button type="submit">تسجيل الدخول</button>
+</form>
+</center>
+{% endblock %}

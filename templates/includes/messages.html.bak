@@ -1,0 +1,5 @@
+{% if messages %}
+{% for message in messages %}
+<span role="alert" style="color:red; font-size:14pt; margin-top:5px;">{{ message }}</span>
+{% endfor %}
+{% endif %}

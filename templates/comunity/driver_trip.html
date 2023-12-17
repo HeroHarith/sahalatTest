@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}رحلتي - سهالات{% endblock %}
+
+{% block content %}
+<h3>تفاصيل الرحلة</h3>
+<p>وقت الرحلة: {{ trip.time }}<br />
+عنوان الرحلة: {{ trip.address }}<br />
+اتجاه الرحلة: 
+{% if trip.direction == 0 %}
+من الجامعة إلى العنوان المحدد
+{% else %}
+من العنوان المحدد إلى الجامعة
+{% endif %}
+</p>
+<hr />
+<h3>قائمة الركاب</h3>
+{% if orders %}
+<table border="1">
+<tr>
+<th>اسم الراكب</th>
+<th>رقم الهاتف</th>
+</tr>
+{% for order in orders %}
+<tr>
+<td>{{ order.user.first_name }} {{ order.user.last_name }}</td>
+<td><a href="tel:{{ order.user.profile.phone }}">{{ order.user.profile.phone }}</a></td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p>ما من ركاب إلى الآن</p>
+{% endif %}
+<hr />
+<h3>ملخص الدفع</h3>
+<p>
+إجمالي الدفع: {{ cost }} ريال<br />
+تكلفة الخدمة: {{ service_cost }} ريال<br />
+أجرة الكابتن: {{ total_cost}} ريال
+</p>
+<hr />
+<h3>الإعلامات</h3>
+<form method="post" class="form">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">إرسال</button>
+</form>
+{% include 'includes/messages.html' %}
+<center>
+
+</center>
+{% endblock %}
