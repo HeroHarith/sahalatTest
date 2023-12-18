@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url 
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ templates_dir = os.path.join(BASE_DIR, "templates")
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-24)4^++^@-*@y2k^lv6o-mv2r&)i!_h04whv!%8!01^18^=w3^'
-
+#SECRET_KEY = 'django-insecure-24)4^++^@-*@y2k^lv6o-mv2r&)i!_h04whv!%8!01^18^=w3^'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+#DEBUG = True
+DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
@@ -82,7 +83,9 @@ DATABASES = {
     }
 }
 
-
+url = os.environ.get("DATABASE_URL")
+#postgres://sahalatsql_user:dHhF0EaD5rRKPNJRb9PDlmdiyJ6WXTTW@dpg-cm04s3ud3nmc738ji6r0-a.oregon-postgres.render.com/sahalatsql
+DATABASES['default'] = dj_database_url.parse(url)
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -128,8 +131,3 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import django_heroku
-django_heroku.settings(locals())
-CSRF_TRUSTED_ORIGINS = [
-    'https://sahalat.herokuapp.com'
-]
