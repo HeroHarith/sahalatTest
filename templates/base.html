@@ -6,12 +6,12 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{% block title %}سهالات{% endblock %}</title>
-	    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+	    <link href="{%  'static/css/style.css' %}" rel="stylesheet">
 </head>
 <body>
 <header style="background-color: rgb(255, 255, 255); opacity:1;">
 <div class="navbar">
-	<img src="{% static '/images/logo.png' %}" alt="سهالات">
+	<img src="{% static 'images/logo.png' %}">
   <a class="nav_item active" href="{% url 'home' %}">الرئيسية</a>
   <a class="nav_item" href="#">تواصل معنا</a>
   <a class="nav_item" href="#">عن سهالات</a>
