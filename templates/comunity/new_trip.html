@@ -3,11 +3,12 @@
 {% block title %}مشوار جديد - سهالات{% endblock %}
 
 {% block content %}
-<center>
-<form method="post">
-<{% csrf_token %}
-{{ form.as_p }}
-<button type="submit">إنشاء</button>
-</form>
-</center>
+<div class="new-trip-container">
+    <h2 class="new-trip-heading">إنشاء مشوار جديد</h2>
+    <form method="post" class="new-trip-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="create-button">إنشاء</button>
+    </form>
+</div>
 {% endblock %}

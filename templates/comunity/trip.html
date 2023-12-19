@@ -3,47 +3,49 @@
 {% block title %}تفاصيل الرحلة - سهالات{% endblock %}
 
 {% block content %}
-<center>
-<h3>تفاصيل الرحلة</h3>
-<p>وقت الرحلة: {{ trip.time }}<br />
-عنوان الرحلة: {{ trip.address }}<br />
-اتجاه الرحلة: 
-{% if trip.direction == 0 %}
-من الجامعة إلى العنوان المحدد
-{% else %}
-من العنوان المحدد إلى الجامعة
-{% endif %}<br />
-ملاحظات الكابتن: <br />
-{{ trip.notes }}
-</p>
-<hr />
-<h3>تفاصيل كابتن الرحلة</h3>
-<p>
-الاسم: {{ trip.user.first_name }} {{ trip.user.last_name }}<br />
-رقم الهاتف: <a href="tel:{{ trip.user.profile.phone }}">{{ trip.user.profile.phone}}</a><br />
-</p>
-<hr />
-<h3>بيانات المركبة</h3>
-<p>
-اسم المركبة: {{ trip.user.car.name }}<br />
-رقم اللوحة: {{ trip.user.car.number }}
-</p>
-<hr />
-{% if not ordered %}
-<a href="{% url 'order' trip.pk %}">انضم إلى الرحلة</a>
-{% else %}
-<h3>إعلامات الرحلة</h3>
-{% if announcements%}
-{% for n in announcements %}
-<p>{{ n.published_at}} <br />
-{{ n.content}}
-</p>
-{% endfor %}
-{% else %}
-{% include 'includes/messages.html' %}<br />
-<p>لم يتم نشر أي إعلامات</p>
-{% endif %}
-{% endif %}
-</center>
-
+<div class="trip-details-container">
+    <div class="section-container">
+        <h3 class="section-heading">تفاصيل الرحلة</h3>
+        <div class="trip-info">
+            <p><strong>وقت الرحلة:</strong> {{ trip.time }}</p>
+            <p><strong>عنوان الرحلة:</strong> {{ trip.address }}</p>
+            <p><strong>اتجاه الرحلة:</strong> {% if trip.direction == 0 %}من الجامعة إلى العنوان المحدد{% else %}من العنوان المحدد إلى الجامعة{% endif %}</p>
+            <p><strong>ملاحظات الكابتن:</strong><br />{{ trip.notes }}</p>
+        </div>
+    </div>
+    <hr />
+    <div class="section-container">
+        <h3 class="section-heading">تفاصيل كابتن الرحلة</h3>
+        <div class="captain-info">
+            <p><strong>الاسم:</strong> {{ trip.user.first_name }} {{ trip.user.last_name }}</p>
+            <p><strong>رقم الهاتف:</strong> <a href="tel:{{ trip.user.profile.phone }}">{{ trip.user.profile.phone }}</a></p>
+        </div>
+    </div>
+    <hr />
+    <div class="section-container">
+        <h3 class="section-heading">بيانات المركبة</h3>
+        <div class="vehicle-info">
+            <p><strong>اسم المركبة:</strong> {{ trip.user.car.name }}</p>
+            <p><strong>رقم اللوحة:</strong> {{ trip.user.car.number }}</p>
+        </div>
+    </div>
+    <hr />
+    {% if not ordered %}
+        <a href="{% url 'order' trip.pk %}" class="join-trip-link">انضم إلى الرحلة</a>
+    {% else %}
+        <div class="section-container">
+            <h3 class="section-heading">إعلامات الرحلة</h3>
+            {% if announcements %}
+                {% for n in announcements %}
+                    <div class="announcement">
+                        <p><strong>{{ n.published_at }}</strong><br />{{ n.content }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                {% include 'includes/messages.html' %}
+                <p>لم يتم نشر أي إعلامات</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

@@ -7,11 +7,10 @@ class Login(forms.Form):
 	remember = forms.BooleanField(label="تذكرني", initial=True, required=False, label_suffix="")
 
 
-
 class NewCustomer(forms.Form):
 	first_name = forms.CharField(label="الاسم الأول")
 	last_name = forms.CharField(label="القبيلة")
-	phone = forms.CharField(label="رقم الهاتف +968", max_length=8, min_length=8, widget=forms.TextInput(attrs={"type": "tel"}))
+	phone = forms.CharField(label="رقم الهاتف +968", max_length=8, min_length=8, widget=forms.TextInput(attrs={"type": "tel"}), validators=[RegexValidator("^(([97]\d{7})|(2[2-6]\d{6}))$")])
 	address = forms.CharField(label="عنوان السكن")
 	username = forms.CharField(label="اسم المستخدم")
 	password = forms.CharField(label="كلمة المرور", widget=forms.PasswordInput())

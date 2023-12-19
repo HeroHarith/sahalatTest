@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 
-
 {% block title %}انضم إلينا - سهالات{% endblock %}
 
-
 {% block content %}
-<center>
-<h3>انضم إلى سهالات</h3>
-<form method="post" class="form">
-{% csrf_token %}
-{{ form }}
-<button type="submit">انضمام</button>
-</form>
-{% include 'includes/messages.html' %}
+<center class="join-us-container">
+    
+    <h3 class="join-us-heading">انضم إلى سهالات</h3>
+    <form method="POST" class="join-us-form">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="join-us-button">انضمام</button>
+    </form>
+    {% include 'includes/messages.html' %}
 </center>
 {% endblock %}
+

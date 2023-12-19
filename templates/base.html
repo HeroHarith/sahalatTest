@@ -8,52 +8,60 @@
 	<title>{% block title %}سهالات{% endblock %}</title>
   <link href="{% static 'style.css' %}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #D69A41">
 <header style="background-color: rgb(255, 255, 255); opacity:1;">
-<div class="navbar">
-  
-	<img src="{% static 'logo.png' %}" alt="سهالات">
-  <a class="nav_item active" href="{% url 'home' %}">الرئيسية</a>
-  <a class="nav_item" href="#">تواصل معنا</a>
-  <a class="nav_item" href="#">عن سهالات</a>
-  {% if user.is_authenticated %}
-  {% if user.profile.ac_type == 0 %}
-  <a href="{% url 'trips' %}" class="nav_item">قائمة الرحلات</a>
-  {% else %}
-  <a href="{% url 'trips' %}" class="nav_item">رحلاتي</a>
-
-  {% endif %}
-  <p style="margin-bottom: 10px;">مرحبًا بك يا {{ user.first_name }}</p>
-  <a href="{% url 'logout' %}"><br>تسجيل الخروج</a>
-  {% else %}
-  <a class="nav_item" href="{% url 'login' %}">تسجيل الدخول</a>
-  <details class="nav_item">
-  <summary>انضم معنا</summary>
-  <ul>
-  <li><a href="{% url 'new_customer' %}" style="color:white;">إنشاء حساب مستفيد</a></li>
-  <li><a href="{% url 'new_driver' %}" style="color:white;">انضم إلى كباتن سهالات</a></li>
-  </ul>
-  </details>
-  {% endif %}
-  
+<div class="navbar" style="direction: rtl;">
+    <img src="{% static 'logo.png' %}" alt="سهالات">
+    <div class="nav_links">
+        <a class="nav_item active" href="{% url 'home' %}">الرئيسية</a>
+        <a class="nav_item" href="#">تواصل معنا</a>
+        <a class="nav_item" href="#">عن سهالات</a>
+        {% if user.is_authenticated %}
+            {% if user.profile.ac_type == 0 %}
+                <a href="{% url 'trips' %}" class="nav_item">قائمة الرحلات</a>
+            {% else %}
+                <a href="{% url 'trips' %}" class="nav_item">رحلاتي</a>
+            {% endif %}
+            <p style="margin-bottom: 10px;">مرحبًا بك يا {{ user.first_name }}</p>
+            <a href="{% url 'logout' %}">تسجيل الخروج</a>
+        {% else %}
+            <div class="dropdown">
+                <button class="dropbtn">انضم معنا</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'new_customer' %}">إنشاء حساب مستفيد</a>
+                    <a href="{% url 'new_driver' %}">انضم إلى كباتن سهالات</a>
+                </div>
+            </div>
+            <a class="nav_item" href="{% url 'login' %}">تسجيل الدخول</a>
+        {% endif %}
+    </div>
 </div>
 </header>
 {% block content %}
 <div style="background-color: #D69A41;">
-<center>
-<br /><br />
-<br />
-<img src="{% static 'logo.png' %}" alt="سهالات">
+  <div class="content">
+    <h1>مرحباً بكم في سهالات!</h1>
+    <p style="color : #fff">هنا، ستجد تجارب مذهلة وفرص رائعة.</p>
+    <div class="features">
+      <div class="feature">
+        <h2>مشاركة التكاليف والرحلات</h2>
+        <p>يتيح التطبيق للطلاب مشاركة رحلاتهم وتقاسم تكاليف الرحلة مع زملائهم في الجامعة. هذا يوفر فرصة للتواصل والتواصل الاجتماعي وفرصة لتوفير المال بالنسبة للجميع.</p>
+      </div>
+      <div class="feature">
+        <h2>حجز مُسبق ومرونة الوقت</h2>
+        <p>يتيح التطبيق للطلاب حجز الجرّة مُسبقًا، مما يوفر لهم الوقت والمرونة في التخطيط لرحلاتهم اليومية داخل أو خارج الحرم الجامعي.</p>
+      </div>
+      <div class="feature">
+        <h2>نظام تقييم شامل</h2>
+        <p>يضمن التطبيق سلامة الرحلات والتجارب عن طريق نظام تقييم شامل يسمح للركاب والسائقين بتقديم تقييمات مفصلة، مما يعزز الثقة ويساهم في تقديم خدمة أفضل بين أفراد المجتمع الجامعي.</p>
+      </div>
+    </div>
+    <div class="login-section">
+      <p style="color : #fff">إذا كنت لم تقم بتسجيل الدخول بعد، يمكنك القيام بذلك الآن:</p>
+      <a href="{% url 'login' %}" class="login-link">تسجيل الدخول</a>
+    </div>
 </div>
-</center>
 {% endblock %}
-<footer>
-<div class="footer">
-  <p>Copyright © 2023 سهالات</p>
 
-</div>
-
-
-</footer>
 </body>
 </html>

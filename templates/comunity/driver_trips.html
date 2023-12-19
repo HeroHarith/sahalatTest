@@ -1,30 +1,26 @@
 {% extends 'base.html' %}
 
-
-{% block title %}رحلاتي - سهالات {% endblock %}
-
+{% block title %}رحلاتي - سهالات{% endblock %}
 
 {% block content %}
-<center>
-<h1>رحلاتي</h1>
-<a href="{% url 'new' %}">رحلة جديدة</a>
-<table border="0">
-<tr>
-<th>وقت الرحلة</th>
-<th>اتجاه الرحلة</th>
-<th>عنوان الرحلة</th>
-<th></th>
-
-</tr>
-{% for trip in trips %}
-<tr>
-<td>{{ trip.time }}</td>
-<td>{% if trip.direction == 0 %}من الجامعة{% else %}إلى الجامعة{% endif %}</td>
-<td>{{ trip.address }}</td>
-<td><a href="{% url 'trip' trip.pk %}">التفاصيل</a></td>
-
-</tr>
-{% endfor %}
-</table>
-</center>
+<div class="my-trips-container">
+    <h1 class="my-trips-heading">رحلاتي</h1>
+    <a href="{% url 'new' %}" class="new-trip-link">رحلة جديدة</a>
+    <table class="trips-table">
+        <tr>
+            <th>وقت الرحلة</th>
+            <th>اتجاه الرحلة</th>
+            <th>عنوان الرحلة</th>
+            <th></th>
+        </tr>
+        {% for trip in trips %}
+            <tr>
+                <td>{{ trip.time }}</td>
+                <td>{% if trip.direction == 0 %}من الجامعة{% else %}إلى الجامعة{% endif %}</td>
+                <td>{{ trip.address }}</td>
+                <td><a href="{% url 'trip' trip.pk %}" class="details-link">التفاصيل</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}

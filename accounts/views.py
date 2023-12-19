@@ -39,6 +39,7 @@ def new_customer(r):
 			if User.objects.filter(username=username).exists():
 				messages.error(r, "اسم المستخدم الذي قمت بإدخاله موجود بالفعل")
 			else:
+				
 				if not accept:
 					messages.error(r, "يجب الموافقة على شروط الاستخدام للمتابعة")
 				else:
@@ -49,8 +50,11 @@ def new_customer(r):
 						profile = Profile(user=user, phone=phone, ac_type=0, address=address)
 						profile.save()
 						auth.login(r, user)
+						
 						messages.success(r, "تم إنشاء حسابك بنجاح")
 						return redirect("home")
+	
+
 	form = NewCustomer()
 	return render(r, "accounts/new_customer.html", {"form": form})
 
@@ -59,6 +63,7 @@ def new_driver(r):
 		form1 = NewCustomer(r.POST, prefix="form1")
 		form2 = CarDetails(r.POST, prefix="form2")
 		if form1.is_valid() and form2.is_valid():
+			print("@sdcvsdvsdvsdv")
 			username = form1.cleaned_data['username']
 			first_name = form1.cleaned_data["first_name"]
 			last_name = form1.cleaned_data["last_name"]

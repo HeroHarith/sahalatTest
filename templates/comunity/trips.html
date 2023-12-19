@@ -1,31 +1,29 @@
 {% extends 'base.html' %}
 
-
 {% block title %}الرحلات - سهالات {% endblock %}
 
-
 {% block content %}
-<center>
-<h1>الرحلات</h1>
-<table border="0">
-<tr>
-<th>وقت الرحلة</th>
-<th>اتجاه الرحلة</th>
-<th>عنوان الرحلة</th>
-<th>كابتن الرحلة</th>
-<th></th>
-
-</tr>
-{% for trip in trips %}
-<tr>
-<td>{{ trip.time }}</td>
-<td>{% if trip.direction == 0 %}من الجامعة{% else %}إلى الجامعة{% endif %}</td>
-<td>{{ trip.address }}</td>
-<td>{{ trip.user.first_name }} {{ trip.user.last_name }}</td>
-<td><a href="{% url 'trip' trip.pk %}">اطلب</a></td>
-
-</tr>
-{% endfor %}
-</table>
-</center>
+<div class="trips-container">
+    <h1 class="trips-heading">الرحلات</h1>
+    <div class="table-wrapper">
+        <table class="trips-table">
+            <tr>
+                <th>وقت الرحلة</th>
+                <th>اتجاه الرحلة</th>
+                <th>عنوان الرحلة</th>
+                <th>كابتن الرحلة</th>
+                <th></th>
+            </tr>
+            {% for trip in trips %}
+            <tr>
+                <td>{{ trip.time }}</td>
+                <td>{% if trip.direction == 0 %}من الجامعة{% else %}إلى الجامعة{% endif %}</td>
+                <td>{{ trip.address }}</td>
+                <td>{{ trip.user.first_name }} {{ trip.user.last_name }}</td>
+                <td><a href="{% url 'trip' trip.pk %}" class="request-link">اطلب</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 {% endblock %}
